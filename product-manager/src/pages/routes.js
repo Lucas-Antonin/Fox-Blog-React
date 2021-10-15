@@ -1,75 +1,50 @@
-import React from "react";
-import {BrowserRouter, Route, Switch, NavLink} from "react-router-dom";
-import SignIn from "./SignIn";
-import ProductList from "./ProductList";
-import ProductEdit from "./ProductEdit";
-import ProductCreate from "./ProductCreate";
-import NotFound from "./NotFound";
-import {PrivateRoute, GuestOnlyRoute} from "../middlewares/routes";
-import SignOut from "./SignOut";
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import App from '../App';
+import SingIn from './SingIn/index';
+import SingUp from './SingUp/index';
 
-/**
- * Main app router module
- */
 const Routes = () => (
     <BrowserRouter>
+        <Navbar />
         <Switch>
-            <Route exact path="/" component={GuessContainer}/>
-            <Route path="*" component={PrivateContainer}/>
+            <Route exact path="/" component={App} />
+            <Route exact path="/singin" component={SingIn} />
+            <Route exact path="/singup" component={SingUp} />
         </Switch>
     </BrowserRouter>
-);
-
-/**
- * Public routes menu and internal router
- */
-const GuessContainer = () => (
-    <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <a className="navbar-brand" href="/">Product Manager System</a>
-        </nav>
-        <Switch>
-            <GuestOnlyRoute exact path="/" component={SignIn}/>
-        </Switch>
-    </div>
 )
 
-/**
- * Private routes menu and internal router
- */
-const PrivateContainer = () => (
-    <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"/>
-            </button>
-            <a className="navbar-brand" href="/">Product Manager System</a>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <NavLink className="nav-link" exact={true} activeClassName='active' to='/products'>
-                            Product List
-                        </NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" exact={true} activeClassName='active' to='/product/create'>
-                            Create New Product
-                        </NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <SignOut/>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <Switch>
-            <PrivateRoute exact path="/products" component={ProductList}/>
-            <PrivateRoute exact path="/product/edit/:id" component={ProductEdit}/>
-            <PrivateRoute exact path="/product/create" component={ProductCreate}/>
-            <PrivateRoute path="*" component={NotFound}/>
-        </Switch>
-    </div>
-);
+class Navbar extends Component {
+    render() {
+        return (
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="#">Fox Blog</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to="/">
+                                    Home
+                                </Link>
+                            </li>
+                        </ul>
+                        <div className="d-flex">
+                        <Link className="nav-link" to='/singin'>
+                            SingIn
+                        </Link>
+                        <Link className="nav-link" to='/singup'>
+                            SingUp
+                        </Link>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        )
+    }
+}
 
 export default Routes;
