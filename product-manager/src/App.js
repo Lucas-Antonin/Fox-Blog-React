@@ -1,41 +1,43 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import "./styles/home.css";
 
-export default class App extends Component{
-    constructor(props){
-        super(props)
+export default class App extends Component {
 
-        this.state = {
-            name: "",
-            skill: ""
-        };
-
-        this.handleLogin = this.handleLogin.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleSkillChange = this.handleSkillChange.bind(this);
-    }
-
-    handleNameChange(event){
-        event.preventDefault();
-        this.setState({name: event.target.value});
-    }
-
-    handleSkillChange(event){
-        event.preventDefault();
-        this.setState({skill: event.target.value});
-    }
-
-    handleLogin(){
-        console.log("Name: " + this.state.name)
-        console.log("Skill: " + this.state.skill)
-    }
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <h1>{this.state.name} is a {this.state.skill}</h1>
-                <input type="text" name="name" id="" placeholder="Name" onChange={this.handleNameChange}/>
-                <input type="text" name="skill" id="" placeholder="Skill" onChange={this.handleSkillChange}/>
-                <button className="btn btn-primary" onClick={this.handleLogin}>Add</button>
+                <header>
+                    <div class="overlay"></div>
+
+                    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+                        <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4" />
+                    </video>
+
+
+                    <div class="container h-100">
+                        <div class="d-flex h-100 text-center align-items-center">
+                            <div class="w-100 text-white">
+                                <h1 class="display-3">Fox Blog</h1>
+                                <p class="lead mb-0">Using HTML5 Video and Bootstrap</p>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="my-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 mx-auto">
+                                <p>The HTML5 video element uses an mp4 video as a source. Change the source video to add in your own background! The header text is vertically centered using flex utilities that are built into Bootstrap.</p>
+                                <p>The overlay color and opacity can be changed by modifying the <code>background-color</code> and <code>opacity</code> properties of the <code>.overlay</code> class in the CSS.</p>
+                                <p>Set the mobile fallback image in the CSS by changing the background image of the header element within the media query at the bottom of the CSS snippet.</p>
+                                <p class="mb-0">
+                                    Created by <a href="https://startbootstrap.com">Start Bootstrap</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         )
     }
