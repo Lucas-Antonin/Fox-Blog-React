@@ -1,31 +1,31 @@
 version: '3.8'
 
 services:
-  product-manager:
-    container_name: product-manager
+  fox-blog:
+    container_name: fox-blog
     build:
-      context: ./product-manager
+      context: ./fox-blog
       dockerfile: Dockerfile
     depends_on:
       - database
-      - product-manager-api
+      - fox-blog-api
     volumes:
-      - './product-manager:/var/www'
+      - './fox-blog:/var/www'
       - '/var/www/node_modules'
     ports:
       - '3000:3000'
     networks:
       - app-network
 
-  product-manager-api:
-    container_name: product-manager-api
+  fox-blog-api:
+    container_name: fox-blog-api
     build:
-      context: ./product-manager-api
+      context: ./fox-blog-api
       dockerfile: Dockerfile
     depends_on:
       - database
     volumes:
-      - './product-manager-api:/var/www'
+      - './fox-blog-api:/var/www'
       - '/var/www/node_modules'
     ports:
       - '8000:3000'
@@ -40,7 +40,7 @@ services:
     user: root
     environment:
       POSTGRES_USER: root
-      POSTGRES_DB: product_control
+      POSTGRES_DB: fox-blog_control
       POSTGRES_PASSWORD: root
     volumes:
       - ./database/tmp/postgres:/var/lib/postgresql/data

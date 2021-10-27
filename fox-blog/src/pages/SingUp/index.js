@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const api = axios.create({
+    baseURL: "http://localhost:8000"
+});
+
+
 class SingUp extends Component {
     constructor(props) {
         super(props);
@@ -10,6 +15,7 @@ class SingUp extends Component {
             email: "",
             password: "",
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -22,19 +28,21 @@ class SingUp extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-    
+
         const user = {
-          username: this.state.username,
-          email: this.state.email,
-          password: this.state.password
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
         };
-    
-        axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-          .then(res => {
-            console.log(res);
-            console.log(res.data);
-          })
-      }
+
+        api.post(`/user/register`, { user })
+            .then(res => {
+
+            }).catch(err => {
+                console.log(err)
+            })
+        this.props.history.push('/');
+    }
 
     render() {
         return (
