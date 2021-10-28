@@ -24,7 +24,7 @@ module.exports = [
                 return res.status(400).json(
                     {
                         errors: [{
-                            "msg": "Invalid value",
+                            "msg": "Email is already in use!",
                             "param": "email",
                             "location": "body"
                         }]
